@@ -27,19 +27,21 @@ class DownloadImageOperation: Operation {
 
     override func main() {
         if isCancelled { return }
-        let url = URL(string: photoURL)
-        let imgData = try? Data(contentsOf: url!)
-        if let imageData = imgData {
-            if let downloadedImage = UIImage(data: imageData) {
-                
-                DispatchQueue.main.async {
-                    self.delegate?.downloadPhotoDidFinish(self, image: downloadedImage)
+        if let url = URL(string: photoURL){
+            let imgData = try? Data(contentsOf: url)
+            if let imageData = imgData {
+                if let downloadedImage = UIImage(data: imageData) {
+                    
+                    DispatchQueue.main.async {
+                        self.delegate?.downloadPhotoDidFinish(self, image: downloadedImage)
+                    }
+                    
+                } else {
+                    handleFail()
                 }
-                
-            } else {
-                handleFail()
             }
         }
+      
         
         
     }

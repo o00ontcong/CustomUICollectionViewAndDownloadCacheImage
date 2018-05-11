@@ -10,33 +10,26 @@ import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
     var imageView: UIImageView!
-    var label: UILabel!
+    var labelText: UILabel!
     // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         initialize()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        
         initialize()
     }
     
     fileprivate func initialize() {
-
-
-    }
-    func configureView(){
+        self.contentView.frame = self.bounds
+        self.contentView.autoresizingMask = [.flexibleWidth , .flexibleHeight]
+        self.imageView = UIImageView()
+        self.imageView.contentMode = .scaleAspectFill;
+        self.imageView.frame = self.bounds;
+        self.contentView.addSubview(self.imageView)
         
     }
-    // MARK: - Other Methods
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
 }
